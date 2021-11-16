@@ -1,4 +1,6 @@
 const input = document.querySelector("input");
+const form = document.querySelector("form");
+var i = 1; //  set your counter to 1
 
 function percent() {
   let circle2 = document.querySelector(".circle2");
@@ -18,16 +20,18 @@ function percent() {
   } else {
     percent.classList.remove("danger");
     circle2.style.strokeDashoffset = `calc((100 * 6) - ((100 * 6) * ${input.value}) / 100)`;
-    percent.innerHTML = `${input.value}%`;
-    setInterval(() => {
-      // alert();
-    }, 1000);
+
+    for (let i = 0; input.value >= i; i++) {
+      setTimeout(() => {
+        percent.innerHTML = `${i}%`;
+      }, 100 * i);
+    }
   }
+  input.value = "";
+  circle2.style.strokeDashoffset = `calc((100 * 6) - ((100 * 0) * ${input.value}) / 100)`;
 }
 
-input.addEventListener("keyup", () => {
+form.addEventListener("submit", () => {
   percent();
-});
-input.addEventListener("click", () => {
-  percent();
+  e.preventDefault();
 });
